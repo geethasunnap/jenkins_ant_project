@@ -1,23 +1,16 @@
-<project default="default">
-
-	<target name="default">
-		<antcall target="clean"/>
-		<antcall target="compile"/>
-		<antcall target="jar"/>
-		<antcall target="run"/>
-    </target>
-
-
-    <target name="clean">
+<project default="run">
+   
+   <target name="clean">
         <delete dir="build"/>
     </target>
 
-    <target name="compile">
-        <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>
-    </target>
-
-    <target name="jar">
+	<target name="compile" >
+	<mkdir dir="build\classes"/>
+		<javac srcdir="D:\gees_studies\jenkins\ant_project_2101\src\" destdir="build\classes\">
+		</javac>
+		</target>
+		
+	<target name="jar" depends="compile">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/HelloWorld.jar" basedir="build/classes">
 		 <manifest>
@@ -25,9 +18,9 @@
             </manifest>
 		</jar>
     </target>
-
-    <target name="run">
+	
+	<target name="run" depends="jar">
         <java jar="build/jar/HelloWorld.jar" fork="true"/>
     </target>
-
+	
 </project>
